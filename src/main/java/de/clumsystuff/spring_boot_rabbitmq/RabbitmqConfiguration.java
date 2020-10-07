@@ -21,17 +21,17 @@ public class RabbitmqConfiguration {
 
 	@Bean
 	TopicExchange exchange() {
-		
+
 		return new TopicExchange("dataExchange");
 	}
-	
+
 	@Bean
 	CustomExchange delayedExchange() {
-		
+
 		Map<String, Object> args = new HashMap<String, Object>();
-	    args.put("x-delayed-type", "direct");
-	    
-	    return new CustomExchange("delayedDataExchange", "x-delayed-message", true, false, args);
+		args.put("x-delayed-type", "direct");
+
+		return new CustomExchange("delayedDataExchange", "x-delayed-message", true, false, args);
 	}
 
 	@Bean
@@ -39,7 +39,7 @@ public class RabbitmqConfiguration {
 
 		return BindingBuilder.bind(queue).to(exchange).with("dataKey");
 	}
-	
+
 	@Bean
 	Binding delayedBinding(Queue queue, CustomExchange delayedExchange) {
 
